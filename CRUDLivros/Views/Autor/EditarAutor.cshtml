@@ -1,0 +1,22 @@
+﻿@model AutorModel
+
+@{
+    ViewData["Title"] = "Editar autor";
+}
+
+<div class="text-center">
+
+<h2>Editar o autor:</h2>
+
+</div>
+
+<form asp-controller="Autor" asp-action="ConfirmaEdicaoAutor" method="post">
+    <input type="hidden" asp-for="Id"/>
+  <div class="mb-3">
+    <label for="nome" class="form-label">Nome</label>
+    <input type="text" id="nome" asp-for="Nome" class="form-control" placeholder="Insira o nome do autor">
+  </div>
+
+  <button type="submit" class="btn btn-success">Confirmar alterações</button>
+  <a class="btn btn-secondary" asp-controller="Autor" asp-action="Index" role="button">Voltar</a>
+</form>
