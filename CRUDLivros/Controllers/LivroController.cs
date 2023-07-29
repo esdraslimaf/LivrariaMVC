@@ -23,7 +23,25 @@ namespace CRUDLivros.Controllers
             return View();
         }
 
-        
+        public IActionResult EditarLivro(int id)
+        {   
+            return View(_repo.BuscarPorId(id));
+        }
+
+        [HttpPost]
+        public IActionResult ConfirmarEdicao(LivroModel livro)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("EditarLivro");
+            }
+            else { 
+            _repo.ConfirmarEdicao(livro);
+                return RedirectToAction("Index"); 
+            }
+        }
+
+
         public IActionResult ExcluirLivro(int id)
         {
             _repo.ExcluirLivro(id);
@@ -35,17 +53,19 @@ namespace CRUDLivros.Controllers
             if (!ModelState.IsValid) {
                 return View("AdicionarLivro");
             }
+           
             var autor = _repoAutor.BuscarAutorId(Livro.AutorId);
             if (autor == null)
             {
-                ModelState.AddModelError("AutorId", "Informe um id de autor existente!");
+                ModelState.AddModelError("AutorId", "O ID desse autor é inexistente!");
                 return View("AdicionarLivro");
-            }
-            
+            } 
+
                 _repo.AddLivro(Livro);
                 return RedirectToAction("Index");
-           
-
         }
+
+    
+
     }
 }

@@ -5,7 +5,8 @@ namespace CRUDLivros.Models
     public class LivroModel
     {
         public int Id { get; set; }
-        [Required(ErrorMessage ="O ID de um autor existente é obrigatório!")]
+        [Required(ErrorMessage = "O ID de um autor existente é obrigatório!")]
+        [Range(1, int.MaxValue, ErrorMessage = "O campo AutorId deve ser um número maior que zero.")]
         public int AutorId { get; set; }
         public AutorModel? Autor { get; set; } = null!;
 

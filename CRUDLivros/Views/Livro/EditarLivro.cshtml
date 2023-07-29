@@ -1,18 +1,20 @@
 ﻿@model LivroModel
 
 @{
-    ViewData["Title"] = "Adicionar novo Livro";
+    ViewData["Title"] = "Editar Livro";
 }
 
 <div class="text-center">
 
  <div asp-validation-summary="All" class="text-danger"></div> 
 
-<h2 class="display-4">Cadastrar novo livro</h2>
+<h2 class="display-4">Editar livro</h2>
 
 </div>
 
-<form asp-controller="Livro" asp-action="AddLivro" method="post">
+
+<form asp-controller="Livro" asp-action="ConfirmarEdicao" method="post">
+<input type="hidden" asp-for="Id" />    
   <div class="mb-3">
     <label for="autorid" class="form-label">AutorID</label>
     <input type="text" id="autorid" asp-for="AutorId" class="form-control" placeholder="Insira o ID do Autor">

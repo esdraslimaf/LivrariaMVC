@@ -25,7 +25,25 @@ namespace CRUDLivros.Repository
        
         public void ExcluirLivro(int id)
         {
-            _db.Remove(_db.Livros.Find(id));
+            LivroModel livro = _db.Livros.Find(id);
+            _db.Remove(livro);
+            _db.SaveChanges();
+        }
+
+        public LivroModel BuscarPorId(int id)
+        {
+           return _db.Livros.FirstOrDefault(l=>l.Id==id);
+        }
+
+        public void ConfirmarEdicao(LivroModel livro)
+        {
+            LivroModel livrodb = _db.Livros.Find(livro.Id);
+            livrodb.Autor = livro.Autor;
+            livrodb.AutorId = livro.AutorId;
+            livrodb.Editora = livro.Editora;
+            livrodb.DataPublicacao = livro.DataPublicacao;
+            livrodb.Titulo = livro.Titulo;
+            _db.Livros.Update(livrodb);
             _db.SaveChanges();
         }
 

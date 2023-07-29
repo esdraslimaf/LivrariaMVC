@@ -7,6 +7,8 @@ namespace CRUDLivros.Repository.Interfaces
         void AddLivro(LivroModel livro);
         List<LivroModel> GetLivros();
         void ExcluirLivro(int id);
+        LivroModel BuscarPorId(int id);
+        void ConfirmarEdicao(LivroModel livro);
 
     }
 }
