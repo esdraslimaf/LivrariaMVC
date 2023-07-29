@@ -7,9 +7,11 @@ namespace CRUDLivros.Controllers
     public class LivroController : Controller
     {
         private readonly ILivroRepository _repo;
-        public LivroController(ILivroRepository repo)
+        private readonly IAutorRepository _repoAutor;
+        public LivroController(ILivroRepository repo, IAutorRepository repoAutor)
         {
             _repo = repo;
+            _repoAutor = repoAutor;
         }
         public IActionResult Index()
         {   
@@ -30,8 +32,20 @@ namespace CRUDLivros.Controllers
 
         public IActionResult AddLivro(LivroModel Livro)
         {
-            _repo.AddLivro(Livro);
-            return RedirectToAction("Index");
+            if (!ModelState.IsValid) {
+                return View("AdicionarLivro");
+            }
+            var autor = _repoAutor.BuscarAutorId(Livro.AutorId);
+            if (autor == null)
+            {
+                ModelState.AddModelError("AutorId", "Informe um id de autor existente!");
+                return View("AdicionarLivro");
+            }
+            
+                _repo.AddLivro(Livro);
+                return RedirectToAction("Index");
+           
+
         }
     }
 }

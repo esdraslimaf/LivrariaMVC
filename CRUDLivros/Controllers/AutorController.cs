@@ -40,6 +40,11 @@ namespace CRUDLivros.Controllers
 
         public IActionResult AddAutor(AutorModel Autor)
         {
+            if (!ModelState.IsValid)
+            {
+                // Se o modelo não for válido, retorne a view com os erros de validação.
+                return View("AdicionarAutor");
+            }
             _repo.AddAutor(Autor);
             return RedirectToAction("Index");
         }

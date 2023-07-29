@@ -1,6 +1,7 @@
 ﻿using CRUDLivros.Data;
 using CRUDLivros.Models;
 using CRUDLivros.Repository.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace CRUDLivros.Repository
 {
@@ -18,7 +19,7 @@ namespace CRUDLivros.Repository
         }
 
         public List<LivroModel> GetLivros() {
-            List<LivroModel> livros = _db.Livros.ToList();
+            List<LivroModel> livros = _db.Livros.Include(a => a.Autor).ToList();
             return livros;
         }
        
